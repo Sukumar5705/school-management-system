@@ -17,7 +17,7 @@ import {
   X,
 } from "lucide-react";
 
-const API_URL = "/api/students";
+const API_URL = import.meta.env.VITE_API_URL || "/api/students";
 const PAGE_SIZE = 8;
 const EMPTY_STUDENT = {
   studentId: "",
@@ -53,10 +53,13 @@ function App() {
       const response = await axios.get(API_URL);
       setStudents(Array.isArray(response.data) ? response.data : []);
     } catch (requestError) {
-      setError(
+      const msg =
         requestError.response?.data?.message ||
-        "Could not load student records. Check the backend and MongoDB connection."
-      );
+        (requestError.code === "ERR_NETWORK"
+          ? "Unable to connect to backend server. Make sure the backend is running at http://127.0.0.1:5000."
+          : requestError.message) ||
+        "Could not load student records. Check the backend and MongoDB connection.";
+      setError(msg);
     } finally {
       setLoading(false);
     }

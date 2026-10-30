@@ -1,0 +1,15 @@
+{
+  "name": "student-management-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Student Management System - Full Stack React, Express, MongoDB",
+  "scripts": {
+    "server": "npm --prefix server run dev",
+    "server:start": "npm --prefix server start",
+    "client": "npm --prefix client run dev",
+    "client:build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "build": "npm --prefix client run build"
+  }
+}
+

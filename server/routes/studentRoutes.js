@@ -36,6 +36,17 @@ function validId(id) {
   return mongoose.Types.ObjectId.isValid(id);
 }
 
+// Ensure database is connected before handling student operations
+router.use((req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      message:
+        "Database is currently disconnected. Please verify MongoDB Atlas IP whitelist (allow 0.0.0.0/0) or check network connection.",
+    });
+  }
+  next();
+});
+
 // Read all student records.
 router.get("/", async (req, res) => {
   try {

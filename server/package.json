@@ -12,6 +12,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
     "mongoose": "^8.24.7"
